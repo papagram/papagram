@@ -68,4 +68,11 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function showRegistrationForm()
+    {
+        if (User::exists()) abort(404);
+
+        return view('auth.register');
+    }
 }
