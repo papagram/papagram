@@ -20,3 +20,9 @@ Auth::routes();
 Route::get('/', 'RootController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::group(['prefix' => 'slip'], function () {
+        Route::resource('dictionaries', 'Admin\Slip\DictionariesController', ['as' => 'admin.slip']);
+    });
+});
