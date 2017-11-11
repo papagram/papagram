@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Receipt;
 use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
@@ -15,4 +16,9 @@ class Card extends Model
         'receipt_date' => 'date',
         'printed_at' => 'datetime',
     ];
+
+    public function receipts()
+    {
+        return $this->hasMany(Receipt::class);
+    }
 }
