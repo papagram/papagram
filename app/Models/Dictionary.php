@@ -23,4 +23,10 @@ class Dictionary extends Model
         'summary' => 'string',
         'title' => 'string',
     ];
+
+    public function getFormatAmountAttribute()
+    {
+        setlocale(LC_MONETARY, 'ja_JP');
+        return money_format('%n', $this->amount);
+    }
 }

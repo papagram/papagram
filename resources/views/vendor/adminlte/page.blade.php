@@ -107,6 +107,13 @@
             <div class="container">
             @endif
 
+            @if(Session::has('message_success'))
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="icon fa fa-check"></i> {{ session('message_success') }}
+                </div>
+            @endif
+
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 @yield('content_header')
