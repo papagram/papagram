@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\Receipt;
 use DB;
 use Illuminate\Http\Request;
+use PDF;
 
 class CardsController extends Controller
 {
@@ -113,5 +114,10 @@ class CardsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pdf()
+    {
+        return PDF::loadView('admin.slip.cards.pdf')->inline('slip.pdf');
     }
 }
