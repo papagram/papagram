@@ -114,6 +114,13 @@
                 </div>
             @endif
 
+            @if(Session::has('message_error'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="icon fa fa-ban"></i> {{ session('message_error') }}
+                </div>
+            @endif
+
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 @yield('content_header')

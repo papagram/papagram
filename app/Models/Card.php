@@ -21,4 +21,14 @@ class Card extends Model
     {
         return $this->hasMany(Receipt::class);
     }
+
+    public function scopeYetPrintedWithReceiptsCount($query)
+    {
+        return $query->whereNull('printed_at')->withCount('receipts');
+    }
+
+    public function isPrinted()
+    {
+        return !is_null($this->printed_at);
+    }
 }
