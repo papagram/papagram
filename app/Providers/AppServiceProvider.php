@@ -17,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
         // インデックス長調整
         // @SEE https://readouble.com/laravel/5.5/ja/migrations.html
         Schema::defaultStringLength(191);
+
+        if (\App::environment('production')) \URL::forceScheme('https');
     }
 
     /**
