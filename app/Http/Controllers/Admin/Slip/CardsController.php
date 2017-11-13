@@ -118,6 +118,6 @@ class CardsController extends Controller
 
     public function pdf()
     {
-        return PDF::loadView('admin.slip.cards.pdf')->inline('slip.pdf');
+        return PDF::loadView('admin.slip.cards.pdf')->stream('slip.pdf');
     }
 }
