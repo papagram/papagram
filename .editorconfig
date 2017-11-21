@@ -12,6 +12,9 @@ insert_final_newline = true
 [*.php]
 indent_size = 4
 
+[*.vue]
+indent_size = 4
+
 [composer.json]
 indent_size = 4
 
