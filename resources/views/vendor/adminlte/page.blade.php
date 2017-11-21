@@ -1,6 +1,7 @@
 @extends('adminlte::master')
 
 @section('adminlte_css')
+    {{-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet"
           href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 'blue') . '.min.css')}} ">
     @stack('css')
@@ -145,6 +146,7 @@
 @stop
 
 @section('adminlte_js')
+    <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     @stack('js')
     @yield('js')
