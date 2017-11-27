@@ -24,7 +24,9 @@ class Card extends Model
 
     public function scopeYetPrintedWithReceiptsCount($query)
     {
-        return $query->whereNull('printed_at')->withCount('receipts');
+        return $query->whereNull('printed_at')
+            ->orderBy('receipt_date', 'asc')
+            ->withCount('receipts');
     }
 
     public function isPrinted()
