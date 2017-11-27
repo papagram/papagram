@@ -10,6 +10,7 @@
         <h1 class="pull-right">
             {!! link_to(route('admin.slip.cards.create'), '伝票入力', ['class' => 'btn btn-primary pull-right']) !!}
             <button class="btn btn-danger pull-right btn-pdf" style="margin-right: 15px;">PDF</button>
+            <button class="btn btn-success pull-right btn-printed" style="margin-right: 15px;">印刷済にする</button>
         </h1>
     </div>
 @stop
@@ -58,13 +59,15 @@
     <div class="box">
         <div class="box-body no-padding">
             {!! Form::open(['url' => route('admin.slip.cards.pdf'), 'id' => 'pdfForm']) !!}
-                <table class="table table-striped">
-                    <tbody>
+                <table class="table table-striped" id="cardsTable">
+                    <thead>
                         <tr>
                             <th>#</th>
                             <th>@lang('card.receipt_date')</th>
                             <th>@lang('card.receipts_count')</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         @foreach($cards as $card)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
@@ -87,6 +90,26 @@
         $('.btn-pdf').on('click', function(e) {
             e.preventDefault();
             $('#pdfForm').submit();
+        });
+
+        $('.btn-printed').on('click', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.slip.cards.printed', [], false) }}',
+                data: $('#pdfForm').serializeArray(),
+                timeout: 10000
+            }).then(function(response) {
+                $('#cardsTable').children('tbody').fadeOut(500, function() {
+                    $(this).empty();
+                });
+            }).fail(function(xhr, statusText, errorThrown) {
+                alert(statusText + ": エラーが発生しました。");
+                console.log(errorThrown);
+            }).always(function(response, statusText, obj) {
+                console.log('通信が完了しました。');
+            });
         });
 
         $('.datepicker').datepicker({

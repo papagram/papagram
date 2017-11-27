@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\Dictionary;
 use App\Models\Receipt;
 use App\Http\Requests\Admin\Slip\CardsCreateRequest;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use PDF;
@@ -133,5 +134,12 @@ class CardsController extends Controller
         }])->get();
 
         return PDF::loadView('admin.slip.cards.pdf', compact('cards'))->inline('slip.pdf');
+    }
+
+    public function printed(Request $request)
+    {
+        Card::whereIn('id', $request->card_ids)->update(['printed_at' => Carbon::now()]);
+
+        return $request->card_ids;
     }
 }
