@@ -2,6 +2,7 @@
 <html lang="ja">
     <head>
         <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/earlyaccess/notosansjp.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
         <style>
             .page-break {
