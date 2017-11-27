@@ -124,7 +124,11 @@ class CardsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $card = Card::findOrFail($id);
+
+        $card->delete();
+
+        return $id;
     }
 
     public function pdf(Request $request)

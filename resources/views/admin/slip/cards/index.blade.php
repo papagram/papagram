@@ -65,6 +65,7 @@
                             <th>#</th>
                             <th>@lang('card.receipt_date')</th>
                             <th>@lang('card.receipts_count')</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,8 +74,15 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $card->receipt_date->format('Y/m/d') }}</td>
                                 <td>{{ $card->receipts_count }}</td>
+                                <td>
+                                    {!! link_to(
+                                        route('admin.slip.cards.destroy', $card->id),
+                                        '削除',
+                                        ['class' => 'btn btn-xs btn-danger destroy']
+                                    ) !!}
+                                </td>
+                                {!! Form::hidden('card_ids[]', $card->id) !!}
                             </tr>
-                            {!! Form::hidden('card_ids[]', $card->id) !!}
                         @endforeach
                     </tbody>
                 </table>
@@ -117,6 +125,32 @@
           format: 'yyyy-mm-dd',
           language: 'ja',
           orientation: "bottom"
+        });
+
+        $('.destroy').on('click', function(e) {
+            e.preventDefault();
+
+            var one = $(this);
+            var token = $("meta[name='csrf-token']").attr('content');
+
+            $.ajax({
+                type: 'POST',
+                url: one.attr('href'),
+                data: {
+                    _method: 'delete',
+                    _token: token
+                },
+                timeout: 10000
+            }).then(function(response) {
+                one.parents('tr').fadeOut(500, function() {
+                    $(this).remove();
+                });
+            }).fail(function(xhr, statusText, errorThrown) {
+                alert(statusText + ": エラーが発生しました。");
+                console.log(errorThrown);
+            }).always(function(response, statusText, obj) {
+                console.log('通信が完了しました。');
+            });
         });
     </script>
 @endpush
