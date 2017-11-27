@@ -12,7 +12,7 @@
     <div class="box box-primary">
         <div class="box-body">
             {!! Form::model($card, ['route' => ['admin.slip.cards.store']]) !!}
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('receipt_date') ? 'has-error' : '' }}">
                     {!! Form::text(
                         'receipt_date',
                         $card->receipt_date,
@@ -22,6 +22,9 @@
                             'data-mindate' => 'today',
                         ]
                     ) !!}
+                    @if($errors->has('receipt_date'))
+                        <p class="help-block">{{ $errors->first('receipt_date') }}</p>
+                    @endif
                 </div>
 
                 @for ($i = 0; $i < 5; $i++)

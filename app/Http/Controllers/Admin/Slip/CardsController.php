@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Dictionary;
 use App\Models\Receipt;
+use App\Http\Requests\Admin\Slip\CardsCreateRequest;
 use DB;
 use Illuminate\Http\Request;
 use PDF;
@@ -45,7 +46,7 @@ class CardsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CardsCreateRequest $request)
     {
         DB::beginTransaction();
         try {
