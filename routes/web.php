@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::group(['prefix' => 'slip'], function () {
-        Route::get('cards/pdf', ['as' => 'admin.slip.cards.pdf', 'uses' => 'Admin\Slip\CardsController@pdf']);
+        Route::post('cards/pdf', ['as' => 'admin.slip.cards.pdf', 'uses' => 'Admin\Slip\CardsController@pdf']);
         Route::resource('cards', 'Admin\Slip\CardsController', ['as' => 'admin.slip']);
 
         Route::resource('dictionaries', 'Admin\Slip\DictionariesController', ['as' => 'admin.slip']);

@@ -119,8 +119,12 @@ class CardsController extends Controller
         //
     }
 
-    public function pdf()
+    public function pdf(Request $request)
     {
-        return PDF::loadView('admin.slip.cards.pdf')->inline('slip.pdf');
+        $cards = Card::with(['receipts' => function ($query) use ($request) {
+            $query->whereIn('card_id', $request->card_ids);
+        }])->get();
+
+        return PDF::loadView('admin.slip.cards.pdf', compact('cards'))->inline('slip.pdf');
     }
 }
