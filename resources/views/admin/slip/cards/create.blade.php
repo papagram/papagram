@@ -76,7 +76,7 @@
                 table.find('.amount').val(response.amount);
                 table.find('.note').val(response.note);
             }).fail(function(xhr, statusText, errorThrown) {
-                alert("#{statusText}: データの取得に失敗しました。");
+                alert(statusText + ": データの取得に失敗しました。");
                 console.log(errorThrown);
             }).always(function(response, statusText, obj) {
                 console.log('通信が完了しました。');
