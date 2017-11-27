@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 2',
+    'title' => 'Papa-gram',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Papa-gram</b>',
 
-    'logo_mini' => '<b>A</b>LT',
+    'logo_mini' => '<b>P-G</b>',
 
     /*
     |--------------------------------------------------------------------------
@@ -115,11 +115,16 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
+            'text'        => '出金伝票',
+            'url'         => '/admin/slip/cards',
             'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
+        ],
+        [
+            'text'        => '仕訳辞書',
+            'url'         => '/admin/slip/dictionaries',
+            'icon'        => 'file',
         ],
         'ACCOUNT SETTINGS',
         [
