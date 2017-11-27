@@ -18,9 +18,16 @@ class CardsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cards = Card::yetPrintedWithReceiptsCount()->get();
+        if ($request->query->count() > 0) {
+            $cards = Card::whereBetween('receipt_date', [
+                $request->query->get('start_date'),
+                $request->query->get('end_date')
+            ])->withCount('receipts')->get();
+        } else {
+            $cards = Card::yetPrintedWithReceiptsCount()->get();
+        }
 
         return view('admin.slip.cards.index')
             ->with(compact('cards'));
