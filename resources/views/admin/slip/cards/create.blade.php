@@ -12,7 +12,6 @@
     <div class="box box-primary">
         <div class="box-body">
             {!! Form::model($card, ['route' => ['admin.slip.cards.store']]) !!}
-
                 <div class="form-group">
                     {!! Form::text(
                         'receipt_date',
@@ -40,7 +39,6 @@
                         ['class' => 'btn btn-default']
                     ) !!}
                 </div>
-
             {!! Form::close() !!}
         </div>
     </div>
@@ -55,6 +53,43 @@
           format: 'yyyy-mm-dd',
           language: 'ja',
           orientation: "bottom"
+        });
+
+        $('.dictionary').on('click', function(e) {
+            e.preventDefault();
+
+            var one = $(this);
+
+            $.ajax({
+                type: 'GET',
+                url: one.attr('href'),
+                dataType: 'json',
+                timeout: 10000
+            }).then(function(response) {
+                var table = one.parents('table');
+                table.find('.payee').val(response.payee);
+                table.find('.item').val(response.item);
+                table.find('.summary').val(response.summary);
+                table.find('.amount').val(response.amount);
+                table.find('.note').val(response.note);
+            }).fail(function(xhr, statusText, errorThrown) {
+                alert("#{statusText}: データの取得に失敗しました。");
+                console.log(errorThrown);
+            }).always(function(response, statusText, obj) {
+                console.log('通信が完了しました。');
+            });
+        });
+
+        $('.clear').on('click', function(e) {
+            e.preventDefault();
+
+            var one = $(this);
+            var table = one.parents('table');
+            table.find('.payee').val("");
+            table.find('.item').val("");
+            table.find('.summary').val("");
+            table.find('.amount').val("");
+            table.find('.note').val("");
         });
     </script>
 @endpush

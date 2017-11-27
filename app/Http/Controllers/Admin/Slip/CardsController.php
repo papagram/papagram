@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Slip;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use App\Models\Dictionary;
 use App\Models\Receipt;
 use DB;
 use Illuminate\Http\Request;
@@ -32,9 +33,10 @@ class CardsController extends Controller
     public function create()
     {
         $card = new Card;
+        $dictionaries = Dictionary::all();
 
         return view('admin.slip.cards.create')
-            ->with(compact('card'));
+            ->with(compact('card', 'dictionaries'));
     }
 
     /**

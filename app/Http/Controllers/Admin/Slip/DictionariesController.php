@@ -59,7 +59,7 @@ class DictionariesController extends Controller
      */
     public function show($id)
     {
-        //
+        return Dictionary::findOrFail($id);
     }
 
     /**

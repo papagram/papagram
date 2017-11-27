@@ -10,7 +10,7 @@
                         "receipts[$i][payee]",
                         null,
                         [
-                            'class' => 'form-control',
+                            'class' => 'form-control payee',
                             'placeholder' => __('receipt.payee'),
                             'rows' => 1,
                         ]
@@ -23,7 +23,7 @@
                         "receipts[$i][item]",
                         null,
                         [
-                            'class' => 'form-control',
+                            'class' => 'form-control item',
                             'placeholder' => __('receipt.item'),
                         ]
                     ) !!}
@@ -35,7 +35,7 @@
                         "receipts[$i][summary]",
                         null,
                         [
-                            'class' => 'form-control',
+                            'class' => 'form-control summary',
                             'placeholder' => __('receipt.summary'),
                             'rows' => 1,
                         ]
@@ -48,7 +48,7 @@
                         "receipts[$i][amount]",
                         null,
                         [
-                            'class' => 'form-control',
+                            'class' => 'form-control amount',
                             'placeholder' => __('receipt.amount'),
                         ]
                     ) !!}
@@ -56,14 +56,31 @@
             </td>
         </tr>
         <tr>
-            <td></td>
+            <td>
+                <div class="dropdown">
+                    <a class="btn btn-primary dropdown-toggle" role="button" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        辞書
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        @foreach($dictionaries as $dictionary)
+                            <li>
+                                {!! link_to(route('admin.slip.dictionaries.show', $dictionary->id), $dictionary->title, ['class' => 'dictionary']) !!}
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div>
+                    <button class="btn btn-danger clear" style="margin-top: 15px;">クリア</button>
+                </div>
+            </td>
             <td colspan="4">
                 <div class="form-group">
                     {!! Form::textarea(
                         "receipts[$i][note]",
                         null,
                         [
-                            'class' => 'form-control',
+                            'class' => 'form-control note',
                             'placeholder' => __('receipt.note'),
                             'rows' => 3,
                         ]
