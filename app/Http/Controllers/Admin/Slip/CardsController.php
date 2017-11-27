@@ -25,7 +25,7 @@ class CardsController extends Controller
             $cards = Card::whereBetween('receipt_date', [
                 $request->query->get('start_date'),
                 $request->query->get('end_date')
-            ])->withCount('receipts')->get();
+            ])->orderBy('receipt_date', 'asc')->withCount('receipts')->get();
         } else {
             $cards = Card::yetPrintedWithReceiptsCount()->get();
         }
@@ -135,7 +135,7 @@ class CardsController extends Controller
     {
         $cards = Card::with(['receipts' => function ($query) use ($request) {
             $query->whereIn('card_id', $request->card_ids);
-        }])->get();
+        }])->whereIn('id', $request->card_ids)->orderBy('receipt_date', 'asc')->get();
 
         return PDF::loadView('admin.slip.cards.pdf', compact('cards'))->inline('slip.pdf');
     }
