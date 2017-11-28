@@ -11,13 +11,13 @@
 @section('content')
     <div class="box box-primary">
         <div class="box-body">
-            {!! Form::model($card, ['route' => ['admin.slip.cards.store']]) !!}
+            {!! Form::model($card, ['route' => ['admin.slip.cards.store'], 'id' => 'cardForm']) !!}
                 <div class="form-group {{ $errors->has('receipt_date') ? 'has-error' : '' }}">
                     {!! Form::text(
                         'receipt_date',
                         $card->receipt_date,
                         [
-                            'class' => 'form-control datepicker',
+                            'class' => 'form-control datepicker receipt-date',
                             'placeholder' => '日付を選択',
                             'data-mindate' => 'today',
                         ]
@@ -35,7 +35,7 @@
                 @endfor
 
                 <div class="form-group col-sm-12">
-                    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary save']) !!}
                     {!! link_to(
                         route('admin.slip.cards.index'),
                         'Cancel',
@@ -93,6 +93,46 @@
             table.find('.summary').val("");
             table.find('.amount').val("");
             table.find('.note').val("");
+        });
+
+        $('.save').on('click', function(e) {
+            e.preventDefault();
+
+            if ($('.receipt-date').val() == '') {
+                alert('伝票日付を入力してください！');
+                return false;
+            }
+
+            var flg = false;
+            $('.payee').each(function() {
+                if ($(this).val() != '') {
+                    flg = true;
+                    return false;
+                }
+            });
+            if (!flg) {
+                alert('伝票を１つは入力してください！');
+                return false;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.slip.cards.store', [], false) }}',
+                data: $('#cardForm').serializeArray(),
+                timeout: 10000
+            }).then(function(response) {
+                var dt = new Date(response.receipt_date);
+                var year = dt.getFullYear();
+                var month = dt.getMonth() +1;
+                var day = dt.getDate();
+                alert(year + '年' + month + '月' + day + '日分を登録しました！');
+                $('.receipt-date').val("");
+            }).fail(function(xhr, statusText, errorThrown) {
+                alert(statusText + ": エラーが発生しました。");
+                console.log(errorThrown);
+            }).always(function(response, statusText, obj) {
+                console.log('通信が完了しました。');
+            });
         });
     </script>
 @endpush

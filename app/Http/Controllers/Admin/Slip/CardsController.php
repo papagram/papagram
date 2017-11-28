@@ -69,17 +69,13 @@ class CardsController extends Controller
             }
 
             DB::commit();
+
+            return $card;
         } catch (\Exception $e) {
             DB::rollback();
 
-            return redirect()
-                ->route('admin.slip.cards.create')
-                ->withInput()
-                ->with('message_error', 'エラーが発生しました。入力内容をご確認下さい。');
+            return $e;
         }
-
-        return redirect(route('admin.slip.cards.index'))
-            ->with('message_success', 'Successfully Created!');
     }
 
     /**
