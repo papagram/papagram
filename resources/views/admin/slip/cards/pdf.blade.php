@@ -5,6 +5,10 @@
         <link href="https://fonts.googleapis.com/earlyaccess/notosansjp.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
         <style>
+            body {
+                font-family: 'Noto Sans JP';
+            }
+
             .page-break {
                 page-break-after: always;
             }
