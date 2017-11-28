@@ -134,5 +134,28 @@
                 console.log('通信が完了しました。');
             });
         });
+
+        $('.receipt-date').on('change', function() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('admin.slip.cards.exists', [], false) }}',
+                dataType: 'json',
+                data: {
+                    receipt_date: $(this).val()
+                },
+                timeout: 10000
+            }).then(function(response) {
+                var dt = new Date(response.receipt_date);
+                var year = dt.getFullYear();
+                var month = dt.getMonth() +1;
+                var day = dt.getDate();
+                alert(year + '年' + month + '月' + day + '日分はすでに登録されています。');
+                $('.receipt-date').val('');
+            }).fail(function(xhr, statusText, errorThrown) {
+                console.log(errorThrown);
+            }).always(function(response, statusText, obj) {
+                console.log('通信が完了しました。');
+            });
+        });
     </script>
 @endpush

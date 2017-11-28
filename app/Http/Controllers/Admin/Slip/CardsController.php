@@ -164,6 +164,11 @@ class CardsController extends Controller
         return $id;
     }
 
+    public function exists(Request $request)
+    {
+        return Card::where('receipt_date', $request->query->get('receipt_date'))->firstOrFail();
+    }
+
     public function pdf(Request $request)
     {
         $cards = Card::with(['receipts' => function ($query) use ($request) {
