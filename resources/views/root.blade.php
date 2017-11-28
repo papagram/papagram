@@ -70,6 +70,10 @@
                 <div class="title m-b-md">
                     {{ config('app.name') }}
                 </div>
+
+                <div class="links">
+                    {!! link_to(route('admin.slip.cards.index'), '出金伝票') !!}
+                </div>
             </div>
         </div>
     </body>
