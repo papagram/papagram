@@ -26,7 +26,6 @@ class Dictionary extends Model
 
     public function getFormatAmountAttribute()
     {
-        setlocale(LC_MONETARY, 'ja_JP');
-        return money_format('%n', $this->amount);
+        return '￥' . number_format(floor($this->amount));
     }
 }
