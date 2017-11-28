@@ -12,6 +12,7 @@
     <div class="box box-primary">
         <div class="box-body">
             {!! Form::model($card, ['route' => ['admin.slip.cards.update', $card->id], 'method' => 'patch', 'id' => 'cardForm']) !!}
+                {!! Form::hidden("id", null) !!}
                 <div class="form-group {{ $errors->has('receipt_date') ? 'has-error' : '' }}">
                     {!! Form::text(
                         'receipt_date',

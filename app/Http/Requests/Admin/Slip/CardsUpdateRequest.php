@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Slip;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Lang;
 
 class CardsUpdateRequest extends FormRequest
@@ -25,7 +26,10 @@ class CardsUpdateRequest extends FormRequest
      public function rules()
      {
          return [
-             'receipt_date' => 'required'
+             'receipt_date' => [
+                'required',
+                Rule::unique('cards')->ignore($this->id),
+            ]
          ];
      }
 
