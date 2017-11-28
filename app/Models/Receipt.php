@@ -29,4 +29,9 @@ class Receipt extends Model
     {
         return $this->belongsTo(Card::class);
     }
+
+    public function getFormatAmountAttribute()
+    {
+        return '￥' . number_format(floor($this->amount));
+    }
 }

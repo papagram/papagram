@@ -104,7 +104,7 @@
                                     {!! nl2br(e($receipt->summary)) !!}
                                 </td>
                                 <td style="width: 15%">
-                                    ￥{{ number_format(floor($receipt->amount)) }}
+                                    {{ $receipt->format_amount }}
                                 </td>
                             </tr>
                             @if(!empty($receipt->note))
