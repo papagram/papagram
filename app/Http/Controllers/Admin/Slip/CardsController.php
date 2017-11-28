@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\Dictionary;
 use App\Models\Receipt;
 use App\Http\Requests\Admin\Slip\CardsCreateRequest;
+use App\Http\Requests\Admin\Slip\CardsUpdateRequest;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -97,7 +98,11 @@ class CardsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $card = Card::findOrFail($id);
+        $dictionaries = Dictionary::all();
+
+        return view('admin.slip.cards.edit')
+            ->with(compact('card', 'dictionaries'));
     }
 
     /**
@@ -107,9 +112,41 @@ class CardsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CardsUpdateRequest $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $card = Card::findOrFail($id);
+            $card->fill($request->all());
+            $card->save();
+
+            foreach ($request->receipts as $receipt) {
+                // スキップ
+                if (is_null($receipt['id']) && is_null($receipt['payee'])) continue;
+
+                // 削除
+                if (!is_null($receipt['id']) && is_null($receipt['payee']))
+                    Receipt::destroy($receipt['id']);
+
+                // 更新
+                if (!is_null($receipt['id']) && !is_null($receipt['payee']))
+                    $card->receipts()->where('id', $receipt['id'])->update($receipt);
+
+                // 作成
+                if (is_null($receipt['id']) && !is_null($receipt['payee']))
+                    $card->receipts()->save(new Receipt($receipt));
+            }
+
+            DB::commit();
+
+            return redirect(route('admin.slip.cards.index'))
+                ->with('message_success', 'Successfully Updated!');
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return redirect(route('admin.slip.cards.edit', $card->id))
+                ->with('message_error', 'エラーが発生しました。お手数ですが最初からやり直してください。');
+        }
     }
 
     /**

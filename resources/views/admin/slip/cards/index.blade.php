@@ -76,6 +76,11 @@
                                 <td>{{ $card->receipts_count }}</td>
                                 <td>
                                     {!! link_to(
+                                        route('admin.slip.cards.edit', $card->id),
+                                        '編集',
+                                        ['class' => 'btn btn-xs btn-success']
+                                    ) !!}
+                                    {!! link_to(
                                         route('admin.slip.cards.destroy', $card->id),
                                         '削除',
                                         ['class' => 'btn btn-xs btn-danger destroy']
