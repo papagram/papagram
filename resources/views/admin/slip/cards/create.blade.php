@@ -10,8 +10,16 @@
 
 @section('content')
     <div class="box box-primary">
-        <div class="box-body">
-            {!! Form::model($card, ['route' => ['admin.slip.cards.store'], 'id' => 'cardForm']) !!}
+        {!! Form::model($card, ['route' => ['admin.slip.cards.store'], 'id' => 'cardForm']) !!}
+            <div class="box-header with-border pull-right">
+                {!! Form::submit('Save', ['class' => 'btn btn-primary save']) !!}
+                {!! link_to(
+                    route('admin.slip.cards.index'),
+                    'Cancel',
+                    ['class' => 'btn btn-default']
+                ) !!}
+            </div>
+            <div class="box-body">
                 <div class="form-group {{ $errors->has('receipt_date') ? 'has-error' : '' }}">
                     {!! Form::text(
                         'receipt_date',
@@ -42,8 +50,8 @@
                         ['class' => 'btn btn-default']
                     ) !!}
                 </div>
-            {!! Form::close() !!}
-        </div>
+            </div>
+        {!! Form::close() !!}
     </div>
 @stop
 
