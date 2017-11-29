@@ -157,5 +157,11 @@
                 console.log('通信が完了しました。');
             });
         });
+
+        $(function() {
+            $(document).on("keypress", function(event) {
+                return event.which !== 13;
+            });
+        });
     </script>
 @endpush
