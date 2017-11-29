@@ -58,7 +58,7 @@
     </div>
     <div class="box">
         <div class="box-body no-padding">
-            {!! Form::open(['url' => route('admin.slip.cards.pdf'), 'id' => 'pdfForm']) !!}
+            {!! Form::open(['url' => route('admin.slip.cards.pdf'), 'id' => 'pdfForm', 'target' => '_blank']) !!}
                 <table class="table table-striped" id="cardsTable">
                     <thead>
                         <tr>
