@@ -166,10 +166,10 @@
             });
         });
 
-        $(function() {
-            $(document).on("keypress", function(event) {
-                return event.which !== 13;
-            });
-        });
+        // $(function() {
+        //     $(document).on("keypress", function(event) {
+        //         return event.which !== 13;
+        //     });
+        // });
     </script>
 @endpush
