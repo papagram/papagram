@@ -97,10 +97,18 @@
             table.find('.note').val("");
         });
 
-        // $(function() {
-        //     $(document).on("keypress", function(event) {
-        //         return event.which !== 13;
-        //     });
-        // });
+        $(() => {
+            $(document).on('keypress', e => {
+                const evt = e || window.event;
+                const keyCode = evt.which || evt.keyCode;
+                const ref = evt.target || evt.srcElement;
+
+                if (keyCode == 13 &&
+                (ref.type == 'text' || ref.type == 'number' || ref.type == 'radio' || ref.type == 'checkbox')) {
+                    alert('aaaaaaa');
+                    return false;
+                }
+            });
+        });
     </script>
 @endpush
