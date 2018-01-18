@@ -30,4 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
         Route::resource('dictionaries', 'Admin\Slip\DictionariesController', ['as' => 'admin.slip']);
     });
+    Route::resource('clients', 'Admin\ClientsController', ['as' => 'admin']);
+    Route::resource('estimates', 'Admin\EstimatesController', ['as' => 'admin']);
+    Route::resource('invoices', 'Admin\InvoicesController', ['as' => 'admin']);
 });
