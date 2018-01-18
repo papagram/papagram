@@ -20,6 +20,9 @@ class Client extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'code', 'name', 'tel1', 'tel2', 'tel3', 'postcode1', 'postcode2',
+        'address', 'email', 'url',
+    ];
 
 }
