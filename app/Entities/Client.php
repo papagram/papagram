@@ -22,7 +22,7 @@ class Client extends Model implements Transformable
      */
     protected $fillable = [
         'code', 'name', 'tel1', 'tel2', 'tel3', 'postcode1', 'postcode2',
-        'address', 'email', 'url',
+        'address', 'email', 'url', 'note',
     ];
 
     public function concatTel()

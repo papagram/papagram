@@ -14,4 +14,5 @@ return [
     'address' => '住所',
     'email' => 'メールアドレス',
     'url' => 'WEBサイト',
+    'note' => '備考',
 ];

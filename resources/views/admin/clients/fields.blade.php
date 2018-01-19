@@ -80,6 +80,7 @@
 ) !!}
 {!! Form::bsEmail('email', $client->email, 'client.email') !!}
 {!! Form::bsText('url', $client->url, 'client.url') !!}
+{!! Form::bsTextarea('note', $client->note, 'client.note') !!}
 
 @push('js')
     <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
