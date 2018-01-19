@@ -2,11 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Entities\Client;
 use App\Http\Controllers\Controller;
+use App\Repositories\ClientRepositoryEloquent;
+use Illuminate\Http\Request;
 
 class ClientsController extends Controller
 {
+    private $clientRepository;
+
+    public function __construct(ClientRepositoryEloquent $client_repository)
+    {
+        $this->clientRepository = $client_repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,8 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        //
+        $clients = $this->clientRepository->all();
+        return view('admin.clients.index', compact('clients'));
     }
 
     /**
@@ -22,9 +32,9 @@ class ClientsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Client $client)
     {
-        //
+        return view('admin.clients.create', compact('client'));
     }
 
     /**
@@ -35,7 +45,10 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->clientRepository->create($request->all());
+
+        return redirect(route('admin.clients.index'))
+            ->with('message_success', 'Client saved successfully.');
     }
 
     /**
