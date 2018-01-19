@@ -70,7 +70,9 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = $this->clientRepository->find($id);
+
+        return view('admin.clients.edit', compact('client'));
     }
 
     /**
@@ -82,7 +84,10 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->clientRepository->update($request->all(), $id);
+
+        return redirect(route('admin.clients.index'))
+            ->with('message_success', 'Client saved successfully.');
     }
 
     /**
