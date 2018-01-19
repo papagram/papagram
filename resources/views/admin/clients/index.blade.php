@@ -53,14 +53,14 @@
                             </td>
                             <td>
                                 {!! link_to(
-                                    route('admin.clients.edit', $client->id),
-                                    '編集',
+                                    route('admin.clients.show', $client->id),
+                                    '詳細',
                                     ['class' => 'btn btn-xs btn-success']
                                 ) !!}
                                 {!! link_to(
-                                    route('admin.clients.destroy', $client->id),
-                                    '削除',
-                                    ['class' => 'btn btn-xs btn-danger destroy']
+                                    route('admin.clients.edit', $client->id),
+                                    '編集',
+                                    ['class' => 'btn btn-xs btn-warning']
                                 ) !!}
                             </td>
                         </tr>
