@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>取引先</h1>
+    <h1>@lang('client.model_name')</h1>
 @stop
 
 @section('content')
