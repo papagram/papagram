@@ -25,12 +25,12 @@ class Client extends Model implements Transformable
         'address', 'email', 'url', 'note',
     ];
 
-    public function concatTel()
+    public function getTelAttribute()
     {
         return $this->tel1 . '-' . $this->tel2 . '-' . $this->tel3;
     }
 
-    public function concatPostcode()
+    public function getPostcodeAttribute()
     {
         return $this->postcode1 . '-' . $this->postcode2;
     }

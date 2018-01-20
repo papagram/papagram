@@ -38,8 +38,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $client->code }}</td>
                             <td>{{ $client->name }}</td>
-                            <td>{{ $client->concatTel() }}</td>
-                            <td>{{ $client->concatPostcode() }}</td>
+                            <td>{{ $client->tel }}</td>
+                            <td>{{ $client->postcode }}</td>
                             <td>{{ $client->address }}</td>
                             <td>{{ \Html::mailto($client->email) }}</td>
                             <td>
