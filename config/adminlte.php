@@ -126,6 +126,11 @@ return [
             'url'         => '/admin/slip/dictionaries',
             'icon'        => 'file',
         ],
+        [
+            'text'        => '取引先',
+            'url'         => '/admin/clients',
+            'icon'        => 'user',
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
