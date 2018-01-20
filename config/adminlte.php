@@ -127,6 +127,16 @@ return [
             'icon'        => 'file',
         ],
         [
+            'text'        => '見積書',
+            'url'         => '/admin/estimates',
+            'icon'        => 'file',
+        ],
+        [
+            'text'        => '請求書',
+            'url'         => '/admin/invoices',
+            'icon'        => 'file',
+        ],
+        [
             'text'        => '取引先',
             'url'         => '/admin/clients',
             'icon'        => 'user',
