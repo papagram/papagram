@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use App\Entities\Estimate;
 use App\Http\Controllers\Controller;
+use App\Repositories\EstimateRepositoryEloquent;
+use Illuminate\Http\Request;
 
 class EstimatesController extends Controller
 {
@@ -22,9 +24,12 @@ class EstimatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Estimate $estimate)
     {
-        //
+        return view(
+            'admin.estimates.create',
+            compact('estimate')
+        );
     }
 
     /**
@@ -35,7 +40,7 @@ class EstimatesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
