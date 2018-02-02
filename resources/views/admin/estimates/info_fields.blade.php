@@ -1,0 +1,1 @@
+{!! Form::bsText('issue_date', $estimate->issue_date, 'estimate.issue_date') !!}
