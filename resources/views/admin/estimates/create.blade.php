@@ -14,7 +14,7 @@
                 @include('admin.estimates.info_fields')
             </div>
         </div>
-    
+
         <div class="box box-primary">
             <div class="box-footer">
                 {!! Form::submit('保存', ['class' => 'btn btn-primary']) !!}
