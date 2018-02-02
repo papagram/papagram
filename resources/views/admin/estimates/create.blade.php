@@ -1,5 +1,10 @@
 @extends('adminlte::page')
 
+@push('css')
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css">
+@endpush
+
 @section('content_header')
     <h1>@lang('estimate.model_name')</h1>
 @stop
@@ -22,3 +27,10 @@
         </div>
     {!! Form::close() !!}
 @stop
+
+@push('js')
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.ja.min.js"></script>
+    <script src="{{ asset('/js/datepicker.js') }}"></script>
+    <script src="{{ asset('/js/disable_enter_key.js') }}"></script>
+@endpush
