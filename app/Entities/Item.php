@@ -24,4 +24,8 @@ class Item extends Model implements Transformable
         'name', 'number','unit_price', 'subtotal'
     ];
 
+    public function itemable()
+    {
+        return $this->morphTo();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Entities\Item;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -25,4 +26,8 @@ class Estimate extends Model implements Transformable
         'subtotal', 'consumption_tax_rate', 'amount_total',
     ];
 
+    public function items()
+    {
+        return $this->morphMany(Item::class, 'itemable');
+    }
 }
