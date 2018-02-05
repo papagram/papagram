@@ -25,11 +25,13 @@ class EstimatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Estimate $estimate, Item $item)
+    public function create(Estimate $estimate, Request $request)
     {
+        $item_count = $this->getItemCount($request);
+
         return view(
             'admin.estimates.create',
-            compact('estimate', 'item')
+            compact('estimate', 'item_count')
         );
     }
 
@@ -87,5 +89,13 @@ class EstimatesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function getItemCount($request)
+    {
+        if ($request->has('items'))
+            return $request->items->count();
+
+        return 1;
     }
 }
