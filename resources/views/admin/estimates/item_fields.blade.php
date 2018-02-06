@@ -55,7 +55,6 @@
         </tr>
     </tbody>
 </table>
-<button v-on:click.prevent="onAdd">追加</button>
 
 @push('js')
     <script src="{{ asset('/js/app.js') }}"></script>
