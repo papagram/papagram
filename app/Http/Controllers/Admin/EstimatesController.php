@@ -7,6 +7,7 @@ use App\Entities\Item;
 use App\Http\Controllers\Controller;
 use App\Repositories\EstimateRepositoryEloquent;
 use Illuminate\Http\Request;
+use Session;
 
 class EstimatesController extends Controller
 {
@@ -27,11 +28,12 @@ class EstimatesController extends Controller
      */
     public function create(Estimate $estimate, Request $request)
     {
+        $items = $this->getOldItems();
         $item_count = $this->getItemCount($request);
 
         return view(
             'admin.estimates.create',
-            compact('estimate', 'item_count')
+            compact('estimate', 'items', 'item_count')
         );
     }
 
@@ -43,7 +45,8 @@ class EstimatesController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // return redirect(route('admin.estimates.create'))->withInput();
+        // dd($request->has('items'));
     }
 
     /**
@@ -97,5 +100,22 @@ class EstimatesController extends Controller
             return $request->items->count();
 
         return 1;
+    }
+
+    private function getOldItems()
+    {
+        $items = collect([]);
+
+        if (Session::has('_old_input.items')) {
+            foreach (Session::get('_old_input.items') as $params) {
+                $item = new Item;
+                $items = $items->merge([$item->fill($params)]);
+            }
+        } else {
+            $item = new Item;
+            $items = $items->merge([$item]);
+        }
+
+        return $items;
     }
 }

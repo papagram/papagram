@@ -1,6 +1,13 @@
-{!! Form::hidden('item_count', $item_count) !!}
+{!! Form::hidden(
+    'item_count',
+    $item_count,
+    [
+        'v-model' => 'itemCount'
+    ]
+) !!}
+
 <table class="table table-bordered">
-    <tbody>
+    <thead>
         <tr>
             <th>@lang('item.name')</th>
             <th>@lang('item.number')</th>
@@ -8,47 +15,69 @@
             <th>@lang('item.subtotal')</th>
             <th>操作</th>
         </tr>
-        @for($i = 0; $i < $item_count; $i++)
-            <tr>
-                <td>
-                    {!! Form::text(
-                        "items[$i][name]",
-                        null,
-                        [
-                            'class' => 'form-control'
-                        ]
-                    ) !!}
-                </td>
-                <td>
-                    {!! Form::number(
-                        "items[$i][number]",
-                        null,
-                        [
-                            'class' => 'form-control'
-                        ]
-                    ) !!}
-                </td>
-                <td>
-                    {!! Form::number(
-                        "items[$i][unit_price]",
-                        null,
-                        [
-                            'class' => 'form-control'
-                        ]
-                    ) !!}
-                </td>
-                <td>
-                    {!! Form::text(
-                        "items[$i][subtotal]",
-                        null,
-                        [
-                            'class' => 'form-control',
-                            'disabled' => true
-                        ]
-                    ) !!}
-                </td>
-                <td></td>
-            </tr>
-        @endfor
+    </thead>
+    <tbody>
+        <tr v-for="(item, key) in items">
+            <td>
+                <input
+                    v-model="item.name"
+                    :name="'items['+ key +'][name]'"
+                    type="text"
+                    class="form-control"
+                >
+            </td>
+            <td>
+                <input
+                    v-model="item.number"
+                    :name="'items['+ key +'][number]'"
+                    type="number"
+                    class="form-control"
+                >
+            </td>
+            <td>
+                <input
+                    v-model="item.unit_price"
+                    :name="'items['+ key +'][unit_price]'"
+                    type="number"
+                    class="form-control"
+                >
+            </td>
+            <td>
+                <input
+                    v-model="item.subtotal"
+                    :name="'items['+ key +'][subtotal]'"
+                    type="number"
+                    class="form-control"
+                    disabled
+                >
+            </td>
+            <td></td>
+        </tr>
     </tbody>
 </table>
+<button v-on:click.prevent="onAdd">追加</button>
+
+@push('js')
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script>
+        const vm = new Vue({
+            el: '#estimateForm',
+            data: {
+                items: {!! $items->toJson() !!},
+                itemCount: {!! $items->count() !!},
+            },
+            methods: {
+                onAdd: function () {
+                    this.items.push(
+                        {
+                            'name': '',
+                            'number': '',
+                            'unit_price': '',
+                            'subtotal': ''
+                        }
+                    )
+                }
+            }
+        })
+    </script>
+@endpush
