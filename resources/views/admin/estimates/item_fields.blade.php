@@ -81,18 +81,19 @@
                             'unit_price': 0,
                             'subtotal': 0
                         }
-                    )
+                    );
 
-                    this.itemCount += 1
+                    this.itemCount += 1;
                 },
                 onDelete: function (key) {
-                    this.items.splice(key, 1)
-                    this.itemCount -= 1
+                    this.items.splice(key, 1);
+                    this.itemCount -= 1;
                 },
                 onCalculateSubtotal: function (key) {
-                    this.items[key].subtotal =  this.items[key].number * this.items[key].unit_price
+                    let item = this.items[key];
+                    item.subtotal = item.number * item.unit_price;
                 }
             }
-        })
+        });
     </script>
 @endpush
