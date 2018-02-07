@@ -29,7 +29,9 @@
                     @include('admin.estimates.item_fields')
                 </div>
                 <div class="box-footer">
-                    <button v-on:click.prevent="onAdd" class="btn btn-danger">追加</button>
+                    <button v-on:click.prevent="onAdd" class="btn btn-success">
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
             </div>
 
