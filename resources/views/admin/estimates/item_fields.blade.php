@@ -51,7 +51,13 @@
                     disabled
                 >
             </td>
-            <td></td>
+            <td>
+                <div class="text-center">
+                    <button v-on:click.prevent="onDelete(key)" class="btn btn-danger btn-xs">
+                        <i class="fa fa-remove"></i>
+                    </button>
+                </div>
+            </td>
         </tr>
     </tbody>
 </table>
@@ -75,6 +81,9 @@
                             'subtotal': ''
                         }
                     )
+                },
+                onDelete: function (key) {
+                    this.items.splice(key, 1)
                 }
             }
         })
