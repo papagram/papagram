@@ -38,6 +38,7 @@
                 <input
                     v-model="item.unit_price"
                     :name="'items['+ key +'][unit_price]'"
+                    v-on:change="onCalculateSubtotal(key)"
                     type="number"
                     class="form-control"
                 >
@@ -76,14 +77,17 @@
                     this.items.push(
                         {
                             'name': '',
-                            'number': '',
-                            'unit_price': '',
-                            'subtotal': ''
+                            'number': 1,
+                            'unit_price': 0,
+                            'subtotal': 0
                         }
                     )
                 },
                 onDelete: function (key) {
                     this.items.splice(key, 1)
+                },
+                onCalculateSubtotal: function (key) {
+                    this.items[key].subtotal =  this.items[key].number * this.items[key].unit_price
                 }
             }
         })
