@@ -36,6 +36,15 @@
             </div>
 
             <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">見積金額</h3>
+                </div>
+                <div class="box-body">
+                    @include('admin.estimates.amount_fields')
+                </div>
+            </div>
+
+            <div class="box box-primary">
                 <div class="box-footer">
                     {!! Form::submit('保存', ['class' => 'btn btn-primary']) !!}
                 </div>
