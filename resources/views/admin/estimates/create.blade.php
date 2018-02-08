@@ -65,8 +65,8 @@
             el: '#estimateForm',
             data: {
                 items: {!! $items->toJson() !!},
-                itemCount: {!! $items->count() !!},
-                subtotal: {!! $estimate->subtotal ?? 0 !!},
+                itemCount: {{ $items->count() }},
+                subtotal: {{ $estimate->subtotal ?? 0 }},
                 consumption_tax_rate: {{ config('const.consumption_tax_rate') }},
                 consumption_tax: 0
             },
