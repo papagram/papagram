@@ -87,27 +87,39 @@
                 onDelete: function (key) {
                     this.items.splice(key, 1);
                     this.updateItemCount()
+                    this.calculateSubtotal();
+                    this.calculateConsumptionTax();
+                    this.calculateAmountTotal();
                 },
                 onCalculate: function (key) {
+                    this.calculateLinePrice(key);
+                    this.calculateSubtotal();
+                    this.calculateConsumptionTax();
+                    this.calculateAmountTotal();
+                },
+                updateItemCount: function () {
+                    this.itemCount = this.items.length
+                },
+                calculateLinePrice: function (key) {
                     let item = this.items[key];
                     item.line_price = item.number * item.unit_price;
-
+                },
+                calculateSubtotal: function () {
                     let subtotal = 0;
                     for(let k of Object.keys(this.items)) {
                         subtotal += this.items[k].line_price;
                     }
 
                     this.subtotal = subtotal;
-
+                },
+                calculateConsumptionTax: function () {
                     this.consumption_tax =
                         this.subtotal * this.consumption_tax_rate;
-
-                    this.amount_total =
-                        this.subtotal + this.consumption_tax
                 },
-                updateItemCount: function () {
-                    this.itemCount = this.items.length
-                }
+                calculateAmountTotal: function () {
+                    this.amount_total =
+                        this.subtotal + this.consumption_tax;
+                },
             }
         });
     </script>
