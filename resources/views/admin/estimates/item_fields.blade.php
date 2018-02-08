@@ -12,7 +12,7 @@
             <th>@lang('item.name')</th>
             <th>@lang('item.number')</th>
             <th>@lang('item.unit_price')</th>
-            <th>@lang('item.subtotal')</th>
+            <th>@lang('item.line_price')</th>
             <th>操作</th>
         </tr>
     </thead>
@@ -30,7 +30,7 @@
                 <input
                     v-model="item.number"
                     :name="'items['+ key +'][number]'"
-                    v-on:change="onCalculateSubtotal(key)"
+                    v-on:change="onCalculateLinePrice(key)"
                     type="number"
                     class="form-control"
                 >
@@ -39,15 +39,15 @@
                 <input
                     v-model="item.unit_price"
                     :name="'items['+ key +'][unit_price]'"
-                    v-on:change="onCalculateSubtotal(key)"
+                    v-on:change="onCalculateLinePrice(key)"
                     type="number"
                     class="form-control"
                 >
             </td>
             <td>
                 <input
-                    v-model="item.subtotal"
-                    :name="'items['+ key +'][subtotal]'"
+                    v-model="item.line_price"
+                    :name="'items['+ key +'][line_price]'"
                     type="number"
                     class="form-control"
                     disabled
@@ -80,7 +80,7 @@
                             'name': '',
                             'number': 1,
                             'unit_price': 0,
-                            'subtotal': 0
+                            'line_price': 0
                         }
                     );
 
@@ -90,9 +90,9 @@
                     this.items.splice(key, 1);
                     this.itemCount -= 1;
                 },
-                onCalculateSubtotal: function (key) {
+                onCalculateLinePrice: function (key) {
                     let item = this.items[key];
-                    item.subtotal = item.number * item.unit_price;
+                    item.line_price = item.number * item.unit_price;
                 }
             }
         });

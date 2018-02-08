@@ -21,8 +21,8 @@ class Item extends Model implements Transformable
      * @var array
      */
     protected $fillable = [
-        'name', 'number','unit_price', 'subtotal',
-        'itemable_id', 'itemable_type'
+        'name', 'number','unit_price', 'line_price',
+        'subtotal', 'itemable_id', 'itemable_type'
     ];
 
     public function itemable()
