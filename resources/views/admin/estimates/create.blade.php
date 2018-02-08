@@ -68,7 +68,8 @@
                 itemCount: {{ $items->count() }},
                 subtotal: {{ $estimate->subtotal ?? 0 }},
                 consumption_tax_rate: {{ config('const.consumption_tax_rate') }},
-                consumption_tax: 0
+                consumption_tax: 0,
+                amount_total: {{ $estimate->amount_total ?? 0 }},
             },
             methods: {
                 onAdd: function () {
@@ -100,6 +101,9 @@
 
                     this.consumption_tax =
                         this.subtotal * this.consumption_tax_rate;
+
+                    this.amount_total =
+                        this.subtotal + this.consumption_tax
                 }
             }
         });
