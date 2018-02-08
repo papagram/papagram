@@ -30,7 +30,7 @@
                 <input
                     v-model="item.number"
                     :name="'items['+ key +'][number]'"
-                    v-on:change="onCalculateLinePrice(key)"
+                    v-on:change="onCalculate(key)"
                     type="number"
                     class="form-control"
                 >
@@ -39,7 +39,7 @@
                 <input
                     v-model="item.unit_price"
                     :name="'items['+ key +'][unit_price]'"
-                    v-on:change="onCalculateLinePrice(key)"
+                    v-on:change="onCalculate(key)"
                     type="number"
                     class="form-control"
                 >

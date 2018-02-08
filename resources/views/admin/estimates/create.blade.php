@@ -66,6 +66,7 @@
             data: {
                 items: {!! $items->toJson() !!},
                 itemCount: {!! $items->count() !!},
+                subtotal: {!! $estimate->subtotal ?? 0 !!}
             },
             methods: {
                 onAdd: function () {
@@ -84,9 +85,16 @@
                     this.items.splice(key, 1);
                     this.itemCount -= 1;
                 },
-                onCalculateLinePrice: function (key) {
+                onCalculate: function (key) {
                     let item = this.items[key];
                     item.line_price = item.number * item.unit_price;
+
+                    let subtotal = 0;
+                    for(let k of Object.keys(this.items)) {
+                        subtotal += this.items[k].line_price;
+                    }
+
+                    this.subtotal = subtotal;
                 }
             }
         });
