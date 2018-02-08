@@ -30,6 +30,7 @@
                 <input
                     v-model="item.number"
                     :name="'items['+ key +'][number]'"
+                    v-on:change="onCalculateSubtotal(key)"
                     type="number"
                     class="form-control"
                 >
