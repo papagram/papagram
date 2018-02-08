@@ -66,7 +66,9 @@
             data: {
                 items: {!! $items->toJson() !!},
                 itemCount: {!! $items->count() !!},
-                subtotal: {!! $estimate->subtotal ?? 0 !!}
+                subtotal: {!! $estimate->subtotal ?? 0 !!},
+                consumption_tax_rate: {{ config('const.consumption_tax_rate') }},
+                consumption_tax: 0
             },
             methods: {
                 onAdd: function () {
@@ -95,6 +97,9 @@
                     }
 
                     this.subtotal = subtotal;
+
+                    this.consumption_tax =
+                        this.subtotal * this.consumption_tax_rate;
                 }
             }
         });
