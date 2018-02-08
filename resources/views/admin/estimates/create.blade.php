@@ -82,11 +82,11 @@
                         }
                     );
 
-                    this.updateItemCount()
+                    this.updateItemCount();
                 },
                 onDelete: function (key) {
                     this.items.splice(key, 1);
-                    this.updateItemCount()
+                    this.updateItemCount();
                     this.calculateSubtotal();
                     this.calculateConsumptionTax();
                     this.calculateAmountTotal();
@@ -98,7 +98,7 @@
                     this.calculateAmountTotal();
                 },
                 updateItemCount: function () {
-                    this.itemCount = this.items.length
+                    this.itemCount = this.items.length;
                 },
                 calculateLinePrice: function (key) {
                     let item = this.items[key];
