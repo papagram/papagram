@@ -63,38 +63,3 @@
         </tr>
     </tbody>
 </table>
-
-@push('js')
-    <script src="{{ asset('/js/app.js') }}"></script>
-    <script>
-        const vm = new Vue({
-            el: '#estimateForm',
-            data: {
-                items: {!! $items->toJson() !!},
-                itemCount: {!! $items->count() !!},
-            },
-            methods: {
-                onAdd: function () {
-                    this.items.push(
-                        {
-                            'name': '',
-                            'number': 1,
-                            'unit_price': 0,
-                            'line_price': 0
-                        }
-                    );
-
-                    this.itemCount += 1;
-                },
-                onDelete: function (key) {
-                    this.items.splice(key, 1);
-                    this.itemCount -= 1;
-                },
-                onCalculateLinePrice: function (key) {
-                    let item = this.items[key];
-                    item.line_price = item.number * item.unit_price;
-                }
-            }
-        });
-    </script>
-@endpush
