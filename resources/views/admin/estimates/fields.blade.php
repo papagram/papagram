@@ -90,7 +90,6 @@
                             :name="'items['+ key +'][line_price]'"
                             type="number"
                             class="form-control"
-                            disabled
                         >
                     </td>
                     <td>
