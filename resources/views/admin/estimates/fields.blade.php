@@ -192,7 +192,7 @@
                 calculateSubtotal: function () {
                     let subtotal = 0;
                     for(let k of Object.keys(this.items)) {
-                        subtotal += this.items[k].line_price;
+                        subtotal += Number(this.items[k].line_price);
                     }
 
                     this.subtotal = subtotal;
