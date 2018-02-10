@@ -26,13 +26,13 @@ class EstimatesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Estimate $estimate, Request $request)
+    public function create(Estimate $estimate)
     {
         $items = $this->getItems();
 
         return view(
             'admin.estimates.create',
-            compact('estimate', 'items', 'item_count')
+            compact('estimate', 'items')
         );
     }
 
