@@ -28,7 +28,7 @@ class EstimatesController extends Controller
      */
     public function create(Estimate $estimate, Request $request)
     {
-        $items = $this->getOldItems();
+        $items = $this->getItems();
 
         return view(
             'admin.estimates.create',
@@ -93,7 +93,7 @@ class EstimatesController extends Controller
         //
     }
 
-    private function getOldItems()
+    private function getItems()
     {
         $items = collect([]);
 
