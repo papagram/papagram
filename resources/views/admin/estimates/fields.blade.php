@@ -46,14 +46,6 @@
         <h3 class="box-title">見積項目</h3>
     </div>
     <div class="box-body">
-        {!! Form::hidden(
-            'item_count',
-            $item_count,
-            [
-                'v-model' => 'itemCount'
-            ]
-        ) !!}
-
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -185,12 +177,9 @@
                             'line_price': 0
                         }
                     );
-
-                    this.updateItemCount();
                 },
                 onDelete: function (key) {
                     this.items.splice(key, 1);
-                    this.updateItemCount();
                     this.calculateSubtotal();
                     this.calculateConsumptionTax();
                     this.calculateAmountTotal();
@@ -200,9 +189,6 @@
                     this.calculateSubtotal();
                     this.calculateConsumptionTax();
                     this.calculateAmountTotal();
-                },
-                updateItemCount: function () {
-                    this.itemCount = this.items.length;
                 },
                 calculateLinePrice: function (key) {
                     let item = this.items[key];
