@@ -28,7 +28,7 @@ class EstimatesController extends Controller
      */
     public function create(Estimate $estimate, Request $request)
     {
-        $item_count = $this->getItemCount($request);
+        $items = $this->getOldItems();
 
         return view(
             'admin.estimates.create',
