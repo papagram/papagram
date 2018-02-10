@@ -158,3 +158,76 @@
         {!! Form::submit('保存', ['class' => 'btn btn-primary']) !!}
     </div>
 </div>
+
+@push('js')
+    <script src="{{ asset('/js/app.js') }}"></script>
+    <script>
+        const vm = new Vue({
+            el: '#estimateForm',
+            data: {
+                items: {!! $items->toJson() !!},
+                itemCount: {{ $items->count() }},
+                subtotal: {{ $estimate->subtotal ?? 0 }},
+                consumption_tax_rate: {{ config('const.consumption_tax_rate') }},
+                consumption_tax: 0,
+                amount_total: {{ $estimate->amount_total ?? 0 }},
+                list: {!! $list !!}
+            },
+            methods: {
+                onAdd: function () {
+                    this.items.push(
+                        {
+                            'name': '',
+                            'number': 1,
+                            'unit_price': 0,
+                            'line_price': 0
+                        }
+                    );
+
+                    this.updateItemCount();
+                },
+                onDelete: function (key) {
+                    this.items.splice(key, 1);
+                    this.updateItemCount();
+                    this.calculateSubtotal();
+                    this.calculateConsumptionTax();
+                    this.calculateAmountTotal();
+                },
+                onCalculate: function (key) {
+                    this.calculateLinePrice(key);
+                    this.calculateSubtotal();
+                    this.calculateConsumptionTax();
+                    this.calculateAmountTotal();
+                },
+                updateItemCount: function () {
+                    this.itemCount = this.items.length;
+                },
+                calculateLinePrice: function (key) {
+                    let item = this.items[key];
+                    item.line_price = item.number * item.unit_price;
+                },
+                calculateSubtotal: function () {
+                    let subtotal = 0;
+                    for(let k of Object.keys(this.items)) {
+                        subtotal += this.items[k].line_price;
+                    }
+
+                    this.subtotal = subtotal;
+                },
+                calculateConsumptionTax: function () {
+                    this.consumption_tax =
+                        this.subtotal * this.consumption_tax_rate;
+                },
+                calculateAmountTotal: function () {
+                    this.amount_total =
+                        this.subtotal + this.consumption_tax;
+                },
+            }
+        });
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.ja.min.js"></script>
+    <script src="{{ asset('/js/datepicker.js') }}"></script>
+    <script src="{{ asset('/js/disable_enter_key.js') }}"></script>
+@endpush
