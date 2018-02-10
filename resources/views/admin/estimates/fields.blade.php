@@ -166,12 +166,14 @@
             el: '#estimateForm',
             data: {
                 items: {!! $items->toJson() !!},
-                itemCount: {{ $items->count() }},
+                itemCount: 1,
                 subtotal: {{ $estimate->subtotal ?? 0 }},
                 consumption_tax_rate: {{ config('const.consumption_tax_rate') }},
                 consumption_tax: 0,
                 amount_total: {{ $estimate->amount_total ?? 0 }},
-                list: {!! $list !!}
+            },
+            created: function () {
+                this.updateItemCount();
             },
             methods: {
                 onAdd: function () {

@@ -28,7 +28,6 @@ class EstimatesController extends Controller
      */
     public function create(Estimate $estimate, Request $request)
     {
-        $items = $this->getOldItems();
         $item_count = $this->getItemCount($request);
 
         return view(
@@ -92,14 +91,6 @@ class EstimatesController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    private function getItemCount($request)
-    {
-        if ($request->has('items'))
-            return $request->items->count();
-
-        return 1;
     }
 
     private function getOldItems()
