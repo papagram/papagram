@@ -15,6 +15,13 @@ class Item extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $attributes = [
+        'name' => '',
+        'number' => 1,
+        'unit_price' => 0,
+        'line_price' => 0,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

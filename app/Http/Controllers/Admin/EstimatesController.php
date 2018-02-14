@@ -104,10 +104,6 @@ class EstimatesController extends Controller
             }
         } else {
             $item = new Item;
-            $item->name = '';
-            $item->number = 1;
-            $item->unit_price = 0;
-            $item->line_price = 0;
             $items = $items->merge([$item]);
         }
 

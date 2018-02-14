@@ -16,6 +16,11 @@ class Estimate extends Model implements Transformable
 {
     use TransformableTrait;
 
+    protected $attributes = [
+        'subtotal' => 0,
+        'amount_total' => 0,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
