@@ -20,6 +20,32 @@
             'estimate.client_name'
         ) !!}
 
+        <div class="form-group">
+            <div class="col-sm-10 col-md-offset-2">
+                <button
+                    type="button"
+                    class="btn btn-info dropdown-toggle"
+                    data-toggle="dropdown"
+                    aria-expanded="true"
+                >
+                    クライアント一覧<span class="fa fa-caret-down"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    @foreach ($clients as $client)
+                        <li>
+                            {!! link_to(
+                                    route('api.clients.show', $client->id),
+                                    $client->name,
+                                    [
+                                        'class' => 'client',
+                                    ]
+                            ) !!}
+                        </li>
+                    @endforeach
+                 </ul>
+            </div>
+        </div>
+
         {!! Form::bsText(
             'subject',
             $estimate->subject,
@@ -213,4 +239,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/locales/bootstrap-datepicker.ja.min.js"></script>
     <script src="{{ asset('/js/datepicker.js') }}"></script>
     <script src="{{ asset('/js/disable_enter_key.js') }}"></script>
+    <script>
+        $('.client').on('click', function(e) {
+            e.preventDefault();
+
+            vm.$http.get(
+                $(this).attr('href')
+            ).then(function (response) {
+                $('input[name="client_name"]').val(response.data.name);
+            });
+        });
+    </script>
 @endpush
