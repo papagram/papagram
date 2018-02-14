@@ -34,7 +34,13 @@
                     @foreach ($clients as $client)
                         <li>
                             {!! link_to(
-                                    route('api.clients.show', $client->id),
+                                    route(
+                                        'api.clients.show',
+                                        [
+                                            'id' => $client->id,
+                                            'api_token' => \Auth::user()->api_token
+                                        ]
+                                    ),
                                     $client->name,
                                     [
                                         'class' => 'client',
