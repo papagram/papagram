@@ -8,16 +8,23 @@ use App\Entities\Item;
 use App\Http\Controllers\Controller;
 use App\Repositories\ClientRepositoryEloquent;
 use App\Repositories\EstimateRepositoryEloquent;
+use DB;
 use Illuminate\Http\Request;
+Use Log;
 use Session;
 
 class EstimatesController extends Controller
 {
+    private $estimateRepository;
     private $clientRepository;
 
-    public function __construct(ClientRepositoryEloquent $client_repository)
+    public function __construct(
+        ClientRepositoryEloquent $client_repository,
+        EstimateRepositoryEloquent $estimate_repository
+    )
     {
         $this->clientRepository = $client_repository;
+        $this->estimateRepository = $estimate_repository;
     }
 
     /**
@@ -27,7 +34,12 @@ class EstimatesController extends Controller
      */
     public function index()
     {
-        //
+        $estimates = $this->estimateRepository->all();
+
+        return view(
+            'admin.estimates.index',
+            compact('estimates')
+        );
     }
 
     /**
@@ -54,8 +66,30 @@ class EstimatesController extends Controller
      */
     public function store(Request $request)
     {
-        // return redirect(route('admin.estimates.create'))->withInput();
-        // dd($request->has('items'));
+        DB::beginTransaction();
+        try {
+            $estimate = $this->estimateRepository->create($request->all());
+
+            foreach ($request->items as $item_params) {
+                $estimate->items()->save(new Item($item_params));
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return redirect()
+                ->route('admin.estimates.create')
+                ->withInput()
+                ->with(
+                    'message_error',
+                    'エラーが発生しました。お手数ですが最初からやり直してください。'
+                );
+        }
+
+        return redirect()
+            ->route('admin.estimates.index')
+            ->with('message_success', 'Estimate saved successfully.');
     }
 
     /**
