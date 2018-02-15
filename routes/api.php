@@ -18,8 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('clients/show/{id}', [
-        'as' => 'api.clients.show',
-        'uses' => 'Api\ClientsController@show'
-    ]);
+    Route::apiResource(
+        'clients',
+        'Api\ClientsController',
+        [
+            'as' => 'api',
+            'only' => 'show',
+        ]
+    );
 });
