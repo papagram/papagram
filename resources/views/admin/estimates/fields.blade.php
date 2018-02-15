@@ -173,6 +173,14 @@
                 'v-model' => 'amount_total',
             ]
         ) !!}
+
+        {!! Form::hidden(
+            'consumption_tax_rate',
+            null,
+            [
+                'v-model' => 'consumption_tax_rate'
+            ]
+        ) !!}
     </div>
 </div>
 
