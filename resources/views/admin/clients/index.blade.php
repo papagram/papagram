@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <div style="margin-bottom: 50px">
+    <div class="inner-wrapper">
         <h1 class="pull-right">
             {!! link_to(
                 route('admin.clients.create'),
