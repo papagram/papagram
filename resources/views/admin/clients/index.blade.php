@@ -2,7 +2,6 @@
 
 @section('content_header')
     <div style="margin-bottom: 50px">
-        <h1 class="pull-left">@lang('client.model_name')</h1>
         <h1 class="pull-right">
             {!! link_to(
                 route('admin.clients.create'),
@@ -17,8 +16,11 @@
 
 @section('content')
     <div class="box">
-        <div class="box-body no-padding">
-            <table class="table table-striped" id="clientsTable">
+        <div class="box-header with-border">
+            <h3 class="box-title">@lang('client.model_name')一覧</h3>
+        </div>
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover" id="clientsTable">
                 <thead>
                     <tr>
                         <th>#</th>
