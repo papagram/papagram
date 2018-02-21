@@ -1,3 +1,8 @@
+@push('css')
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.min.css">
+@endpush
+
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title">見積情報</h3>
