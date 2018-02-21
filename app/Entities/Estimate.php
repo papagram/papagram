@@ -35,4 +35,9 @@ class Estimate extends Model implements Transformable
     {
         return $this->morphMany(Item::class, 'itemable');
     }
+
+    public function getAmountTotalInYenAttribute()
+    {
+        return number_format($this->amount_total) . '円（税込）';
+    }
 }
