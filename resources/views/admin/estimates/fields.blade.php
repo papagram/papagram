@@ -191,7 +191,6 @@
 </div>
 
 @push('js')
-    <script src="{{ asset('/js/app.js') }}"></script>
     <script>
         const vm = new Vue({
             el: '#estimateForm',
