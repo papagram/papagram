@@ -2,7 +2,6 @@
 
 @section('content_header')
     <div style="margin-bottom: 50px">
-        {{-- <h1 class="pull-left">@lang('client.model_name')</h1> --}}
         <h1 class="pull-right">
             {!! link_to(
                 route('admin.estimates.create'),
