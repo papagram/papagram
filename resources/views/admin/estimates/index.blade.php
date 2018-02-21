@@ -16,12 +16,12 @@
 
 @section('content')
     <div class="box">
-        <div class="box-header">
-            <h3 class="box-title">見積書一覧</h3>
+        <div class="box-header with-border">
+            <h3 class="box-title">@lang('estimate.model_name')一覧</h3>
         </div>
         <div class="box-body table-responsive no-padding">
             <table class="table table-hover">
-                <tbody>
+                <thead>
                     <tr>
                         <th>@lang('estimate.issue_date')</th>
                         <th>@lang('estimate.expiration_date')</th>
@@ -30,6 +30,8 @@
                         <th>@lang('estimate.amount_total')</th>
                         <th>操作</th>
                     </tr>
+                </thead>
+                <tbody>
                     @foreach ($estimates as $estimate)
                         <tr>
                             <td>{{ $estimate->issue_date }}</td>
