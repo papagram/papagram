@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>@lang('estimate.model_name')</h1>
+    <h1>@lang('estimate.model_name')作成</h1>
 @stop
 
 @section('content')
