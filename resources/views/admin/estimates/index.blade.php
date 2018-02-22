@@ -39,7 +39,13 @@
                             <td>{{ $estimate->client_name }}</td>
                             <td>{{ $estimate->subject }}</td>
                             <td>{{ $estimate->amount_total_in_yen }}</td>
-                            <td></td>
+                            <td>
+                                {!! link_to(
+                                    route('admin.estimates.edit', $estimate->id),
+                                    '編集',
+                                    ['class' => 'btn btn-xs btn-warning']
+                                ) !!}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

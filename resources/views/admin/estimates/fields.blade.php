@@ -95,6 +95,11 @@
             </thead>
             <tbody>
                 <tr v-for="(item, key) in items">
+                    <input
+                        v-model="item.id"
+                        :name="'items['+ key +'][id]'"
+                        type="hidden"
+                    >
                     <td>
                         <input
                             v-model="item.name"
@@ -210,6 +215,7 @@
                 onAdd: function () {
                     this.items.push(
                         {
+                            'id': '',
                             'name': '',
                             'number': 1,
                             'unit_price': 0,

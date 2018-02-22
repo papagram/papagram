@@ -8,6 +8,7 @@ use App\Entities\Item;
 use App\Http\Controllers\Controller;
 use App\Repositories\ClientRepositoryEloquent;
 use App\Repositories\EstimateRepositoryEloquent;
+use App\Repositories\ItemRepositoryEloquent;
 use DB;
 use Illuminate\Http\Request;
 Use Log;
@@ -17,14 +18,17 @@ class EstimatesController extends Controller
 {
     private $estimateRepository;
     private $clientRepository;
+    private $itemRepository;
 
     public function __construct(
         ClientRepositoryEloquent $client_repository,
-        EstimateRepositoryEloquent $estimate_repository
+        EstimateRepositoryEloquent $estimate_repository,
+        ItemRepositoryEloquent $itemRepository
     )
     {
         $this->clientRepository = $client_repository;
         $this->estimateRepository = $estimate_repository;
+        $this->itemRepository = $itemRepository;
     }
 
     /**
@@ -111,7 +115,14 @@ class EstimatesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $estimate = $this->estimateRepository->find($id);
+        $items = $estimate->items;
+        $clients = $this->clientRepository->all();
+
+        return view(
+            'admin.estimates.edit',
+            compact('estimate', 'items', 'clients')
+        );
     }
 
     /**
@@ -123,7 +134,39 @@ class EstimatesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $estimate = $this->estimateRepository->update($request->all(), $id);
+
+            $targetItemIds = $estimate->items->pluck('id')->diff(
+                collect($request->items)->pluck('id')
+            );
+
+            if (!empty($targetItemIds)) Item::destroy($targetItemIds);
+
+            foreach ($request->items as $item) {
+                // create
+                if (empty($item['id']))
+                    $estimate->items()->save(new Item($item));
+
+                // update
+                if (!empty($item['id'])) {
+                    $estimate->items()->save(
+                        $this->itemRepository->find($item['id'])->fill($item)
+                    );
+                }
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e);
+        }
+
+
+        return redirect()
+            ->route('admin.estimates.index')
+            ->with('message_success', 'Estimate saved successfully.');
     }
 
     /**
