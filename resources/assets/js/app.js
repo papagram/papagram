@@ -17,6 +17,7 @@ Vue.prototype.$http = axios;
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('delete-link-component', require('./components/DeleteLinkComponent.vue'));
 
 const app = new Vue({
     el: '#app'

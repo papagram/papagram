@@ -26,4 +26,13 @@ Route::group(['middleware' => 'auth:api'], function () {
             'only' => 'show',
         ]
     );
+
+    Route::apiResource(
+        'estimates',
+        'Api\EstimatesController',
+        [
+            'as' => 'api',
+            'only' => 'destroy',
+        ]
+    );
 });

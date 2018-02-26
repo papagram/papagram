@@ -45,6 +45,15 @@
                                     '編集',
                                     ['class' => 'btn btn-xs btn-warning']
                                 ) !!}
+                                <delete-link-component
+                                    href="{{ route(
+                                        'api.estimates.destroy',
+                                        [
+                                            'estimate' => $estimate->id,
+                                            'api_token' => \Auth::user()->api_token
+                                        ]
+                                    ) }}"
+                                ></delete-link-component>
                             </td>
                         </tr>
                     @endforeach
