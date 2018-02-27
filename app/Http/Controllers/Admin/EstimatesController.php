@@ -142,7 +142,7 @@ class EstimatesController extends Controller
                 collect($request->items)->pluck('id')
             );
 
-            if (!empty($targetItemIds)) Item::destroy($targetItemIds);
+            if ($targetItemIds->count() > 0) Item::destroy($targetItemIds);
 
             foreach ($request->items as $item) {
                 // create
