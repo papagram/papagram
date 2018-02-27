@@ -47,6 +47,7 @@
 @yield('body')
 
     </div>
+<script src="/js/lang.js"></script>
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 

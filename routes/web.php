@@ -34,3 +34,25 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('estimates', 'Admin\EstimatesController', ['as' => 'admin']);
     Route::resource('invoices', 'Admin\InvoicesController', ['as' => 'admin']);
 });
+
+// Localization
+// @SEE https://medium.com/@serhii.matrunchyk/using-laravel-localization-with-javascript-and-vuejs-23064d0c210e
+Route::get('/js/lang.js', function () {
+    $strings = Cache::rememberForever('lang.js', function () {
+        $lang = config('app.locale');
+
+        $files   = glob(resource_path('lang/' . $lang . '/*.php'));
+        $strings = [];
+
+        foreach ($files as $file) {
+            $name           = basename($file, '.php');
+            $strings[$name] = require $file;
+        }
+
+        return $strings;
+    });
+
+    header('Content-Type: text/javascript');
+    echo('window.i18n = ' . json_encode($strings) . ';');
+    exit();
+})->name('assets.lang');
