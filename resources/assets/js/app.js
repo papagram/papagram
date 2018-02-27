@@ -9,6 +9,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 Vue.prototype.$http = axios;
+Vue.prototype.trans = string => _.get(window.i18n, string);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -17,7 +18,8 @@ Vue.prototype.$http = axios;
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('delete-link-component', require('./components/DeleteLinkComponent.vue'));
+Vue.component('delete-link', require('./components/DeleteLink.vue'));
+Vue.component('estimates-table', require('./components/EstimatesTable.vue'));
 
 const app = new Vue({
     el: '#app'

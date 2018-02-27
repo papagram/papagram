@@ -20,45 +20,10 @@
             <h3 class="box-title">@lang('estimate.model_name')一覧</h3>
         </div>
         <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>@lang('estimate.issue_date')</th>
-                        <th>@lang('estimate.expiration_date')</th>
-                        <th>@lang('estimate.client_name')</th>
-                        <th>@lang('estimate.subject')</th>
-                        <th>@lang('estimate.amount_total')</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($estimates as $estimate)
-                        <tr>
-                            <td>{{ $estimate->issue_date }}</td>
-                            <td>{{ $estimate->expiration_date }}</td>
-                            <td>{{ $estimate->client_name }}</td>
-                            <td>{{ $estimate->subject }}</td>
-                            <td>{{ $estimate->amount_total_in_yen }}</td>
-                            <td>
-                                {!! link_to(
-                                    route('admin.estimates.edit', $estimate->id),
-                                    '編集',
-                                    ['class' => 'btn btn-xs btn-warning']
-                                ) !!}
-                                <delete-link-component
-                                    href="{{ route(
-                                        'api.estimates.destroy',
-                                        [
-                                            'estimate' => $estimate->id,
-                                            'api_token' => \Auth::user()->api_token
-                                        ]
-                                    ) }}"
-                                ></delete-link-component>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            <estimates-table
+                :estimates="{{$estimates->toJson()}}"
+                api_token="{{ \Auth::user()->api_token }}"
+            ></estimates-table>
         </div>
     </div>
 @stop

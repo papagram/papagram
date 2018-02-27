@@ -981,6 +981,9 @@ __webpack_require__(11);
 
 window.Vue = __webpack_require__(33);
 Vue.prototype.$http = axios;
+Vue.prototype.trans = function (string) {
+  return _.get(window.i18n, string);
+};
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -989,7 +992,8 @@ Vue.prototype.$http = axios;
  */
 
 Vue.component('example-component', __webpack_require__(36));
-Vue.component('delete-link-component', __webpack_require__(45));
+Vue.component('delete-link', __webpack_require__(54));
+Vue.component('estimates-table', __webpack_require__(51));
 
 var app = new Vue({
   el: '#app'
@@ -30178,15 +30182,21 @@ if (false) {
 /* 42 */,
 /* 43 */,
 /* 44 */,
-/* 45 */
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(37)
 /* script */
-var __vue_script__ = __webpack_require__(47)
+var __vue_script__ = __webpack_require__(52)
 /* template */
-var __vue_template__ = __webpack_require__(46)
+var __vue_template__ = __webpack_require__(53)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -30203,7 +30213,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/DeleteLinkComponent.vue"
+Component.options.__file = "resources/assets/js/components/EstimatesTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -30213,9 +30223,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-754f64d1", Component.options)
+    hotAPI.createRecord("data-v-1d7ba28c", Component.options)
   } else {
-    hotAPI.reload("data-v-754f64d1", Component.options)
+    hotAPI.reload("data-v-1d7ba28c", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -30226,7 +30236,227 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 46 */
+/* 52 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        estimates: {
+            type: Array,
+            default: []
+        },
+        api_token: String
+    },
+    methods: {
+        remove: function remove(index) {
+            this.estimates.splice(index, 1);
+            this.$forceUpdate();
+        }
+    }
+});
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("table", { staticClass: "table table-hover" }, [
+    _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v(_vm._s(_vm.trans("estimate.issue_date")))]),
+        _vm._v(" "),
+        _c("th", [_vm._v(_vm._s(_vm.trans("estimate.expiration_date")))]),
+        _vm._v(" "),
+        _c("th", [_vm._v(_vm._s(_vm.trans("estimate.client_name")))]),
+        _vm._v(" "),
+        _c("th", [_vm._v(_vm._s(_vm.trans("estimate.subject")))]),
+        _vm._v(" "),
+        _c("th", [_vm._v(_vm._s(_vm.trans("estimate.amount_total")))]),
+        _vm._v(" "),
+        _c("th", [_vm._v("操作")])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "tbody",
+      _vm._l(_vm.estimates, function(estimate, key) {
+        return _c("tr", { key: estimate.id }, [
+          _c("td", [_vm._v(_vm._s(estimate.issue_date))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(estimate.expiration_date))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(estimate.client_name))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(estimate.subject))]),
+          _vm._v(" "),
+          _c("td", [
+            _vm._v(
+              _vm._s(estimate.amount_total.toLocaleString("ja-JP")) +
+                "円（税込）"
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "td",
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-xs btn-warning",
+                  attrs: { href: "/admin/estimates/" + estimate.id + "/edit" }
+                },
+                [_vm._v("編集")]
+              ),
+              _vm._v(" "),
+              _c("delete-link", {
+                attrs: {
+                  href:
+                    "/api/estimates/" +
+                    estimate.id +
+                    "?api_token=" +
+                    _vm.api_token,
+                  index: key
+                },
+                on: { "on-remove": _vm.remove }
+              })
+            ],
+            1
+          )
+        ])
+      })
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1d7ba28c", module.exports)
+  }
+}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(37)
+/* script */
+var __vue_script__ = __webpack_require__(55)
+/* template */
+var __vue_template__ = __webpack_require__(56)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/DeleteLink.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b0050188", Component.options)
+  } else {
+    hotAPI.reload("data-v-b0050188", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        href: String,
+        index: Number
+    },
+    methods: {
+        remove: function remove(index) {
+            var app = this;
+            this.$http.delete(this.href).then(function (response) {
+                app.$emit('on-remove', index);
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -30241,7 +30471,7 @@ var render = function() {
       on: {
         click: function($event) {
           $event.preventDefault()
-          _vm.remove()
+          _vm.remove(_vm.index)
         }
       }
     },
@@ -30254,31 +30484,9 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-754f64d1", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-b0050188", module.exports)
   }
 }
-
-/***/ }),
-/* 47 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['href'],
-    methods: {
-        remove: function remove() {
-            this.$http.delete(this.href).then(function (response) {
-                alert('削除しました');
-            });
-        }
-    }
-});
 
 /***/ })
 /******/ ]);
