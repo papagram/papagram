@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(estimate, key) in estimates" :key="estimate.id">
+            <tr v-for="(estimate, index) in estimates" :key="estimate.id">
                 <td>{{ estimate.issue_date }}</td>
                 <td>{{ estimate.expiration_date }}</td>
                 <td>{{ estimate.client_name }}</td>
@@ -24,7 +24,7 @@
                     >編集</a>
                     <delete-link
                         :href="'/api/estimates/' + estimate.id + '?api_token=' + api_token"
-                        :index="key"
+                        :index="index"
                         @on-remove="remove"
                     ></delete-link>
                 </td>

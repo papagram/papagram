@@ -30320,7 +30320,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "tbody",
-      _vm._l(_vm.estimates, function(estimate, key) {
+      _vm._l(_vm.estimates, function(estimate, index) {
         return _c("tr", { key: estimate.id }, [
           _c("td", [_vm._v(_vm._s(estimate.issue_date))]),
           _vm._v(" "),
@@ -30356,7 +30356,7 @@ var render = function() {
                     estimate.id +
                     "?api_token=" +
                     _vm.api_token,
-                  index: key
+                  index: index
                 },
                 on: { "on-remove": _vm.remove }
               })
