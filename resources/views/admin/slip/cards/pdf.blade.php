@@ -71,6 +71,9 @@
                 border: 1px solid #000;
                 margin: 0px;
                 padding-left: 4px;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                white-space: normal;
             }
 
             #pdf .table .no {
