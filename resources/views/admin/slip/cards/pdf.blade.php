@@ -5,8 +5,22 @@
         {{--<link href="https://fonts.googleapis.com/earlyaccess/notosansjp.css" rel="stylesheet">--}}
         <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
         <style>
+            @font-face {
+                font-family: ipag;
+                font-style: normal;
+                font-weight: normal;
+                src: url('{{ storage_path('fonts/ipag.ttf') }}') format('truetype');
+            }
+
+            @font-face {
+                font-family: ipag;
+                font-style: bold;
+                font-weight: bold;
+                src: url('{{ storage_path('fonts/ipag.ttf') }}') format('truetype');
+            }
+
             body {
-                font-family: 'Noto Sans JP', sans-serif;
+                font-family: ipag !important;
             }
 
             .page-break {
@@ -15,7 +29,7 @@
 
             #pdf .receipt-date {
                 font-size: 40px;
-                width: 800px;
+                width: 700px;
                 text-align: right;
             }
 

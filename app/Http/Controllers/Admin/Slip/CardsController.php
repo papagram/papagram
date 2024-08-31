@@ -175,7 +175,7 @@ class CardsController extends Controller
             $query->whereIn('card_id', $request->card_ids);
         }])->whereIn('id', $request->card_ids)->orderBy('receipt_date', 'asc')->get();
 
-        return PDF::loadView('admin.slip.cards.pdf', compact('cards'))->inline('slip.pdf');
+        return PDF::loadView('admin.slip.cards.pdf', compact('cards'))->stream('slip.pdf');
     }
 
     public function printed(Request $request)
